@@ -1,6 +1,14 @@
 import './App.css';
 import Customer from './components/Customer';
+import TOC from './components/TOC';
+import Subject from './components/Subject';
+import Content from './components/Content';
 import { Component } from 'react';
+// import Table from '@material-ui/core/Table';
+// import TableHead from '@material-ui/core/TableHead';
+// import TableBody from '@material-ui/core/TableBody';
+// import TableRow from '@material-ui/core/TableRow';
+// import TableCell from '@material-ui/core/TableCell';
 
 
 const customers = [
@@ -31,9 +39,43 @@ const customers = [
 ]
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      mode: "read",
+      subject:{title: 'WEB', sub: 'World wid Web!'},
+      welcome: {title: "welcome", desc:"hello, React!!"},
+      contents:[
+        {id:1, title:'HTML', desc:'HTML is HyperText...'},
+        {id:2, title:'CSS', desc:'CSS is for design...'},
+        {id:3, title:'HTML', desc:'JS is for interactive...'}
+      ]
+    }
+  }
   render() {
+    var _title, _desc = null;
+    if (this.state.mode === 'welcome'){
+      _title = this.state.welcome.title;
+      _desc = this.state.welcome.desc;
+    } else if(this.state.mode === 'read') {
+      _title = this.state.contents[0].title;
+      _desc = this.state.contents[0].desc;
+    }
     return (
       <div>
+        {/* <Subject title={this.state.subject.title} 
+        sub={this.state.subject.sub}/> */}
+          <header>
+            <h1><a href="/" onClick={function(e){
+              console.log(e);
+              e.preventDefault();
+              // debugger;
+            }}>{this.state.subject.title}</a></h1>
+            {this.state.subject.sub}
+        </header>
+        <TOC data={this.state.contents}/>
+        <Content title={_title} desc={_desc}/>
+        
         {
           // c => 한명의 고객을 c.OO 으로 부르겠다
           customers.map(c => {
