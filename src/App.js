@@ -76,7 +76,8 @@ class App extends Component {
         <TOC data={this.state.contents}/>
         <Content title={_title} desc={_desc}/>
         
-        {
+        
+        {/*
           // c => 한명의 고객을 c.OO 으로 부르겠다
           customers.map(c => {
             return (
@@ -90,7 +91,7 @@ class App extends Component {
                 job={c.job}
             />)
           })
-        }
+        /*}
 
       {/* <Customer 
         id={customers[0].id}
